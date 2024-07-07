@@ -1,3 +1,341 @@
 <!DOCTYPE html>
-<p>Test</p>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Randomizer</title>
+    <link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+    <div id="header">
+        <p>Header</p>
+    </div>
+
+    <div id="wrapper">
+        <div id="level-container">
+            <button class="level-button" data-level="beginner">Beginner</button>
+            <button class="level-button" data-level="intermediate">Intermediate</button>
+            <button class="level-button" data-level="advanced">Advanced</button>
+        </div>
+       
+        <div id="workout-image-container">
+            <img id="workout-image-1" src="" alt="Workout Image 1" class="workout-img"> 
+            
+            <img id="workout-image-2" src="" alt="Workout Image 2" class="workout-img">
+           
+            <img id="workout-image-3" src="" alt="Workout Image 3" class="workout-img" style="display:none;">
+        </div>
+        <div id="exercise-instructions">
+                
+        </div>
+    </div>
+
+    <script>
+        const workouts = {
+            beginner: [
+                {   
+                    name: "Alternating Heal Touches",
+                    path: 'media/beginner/Alternating-Heel-Touches.gif',
+                    description: `
+                        Lie on your back with knees bent and feet flat on the floor. 
+                        Lift your shoulder blades off the floor and touch your heels alternately with your hands.
+                        Repeat for the desired number of repetitions, focusing on controlled movements.
+                    `
+                },
+                { 
+                    name: "Alternating Oblique Crunches",
+                    path: 'media/beginner/Alternating-Oblique-Crunches.gif',
+                    description: `
+                        Lie on your back with knees bent and hands behind your head. 
+                        Crunch up and twist to touch your right elbow to your left knee, then alternate sides.
+                        Keep your lower back on the floor throughout the exercise.
+                    `
+                },
+                { 
+                    name: "Bicycle Crunch",
+                    path: 'media/beginner/Bicycle-Crunch.gif',
+                    description: `
+                        Lie on your back with knees bent and hands behind your head. 
+                        Perform a bicycle motion with your legs while twisting your torso to touch your left elbow to your right knee.
+                        Breathe out as you crunch and focus on engaging your core muscles.
+                    `
+                },
+                { 
+                    name: "Crunch",
+                    path: 'media/beginner/Crunch.gif',
+                    description: `
+                        Lie on your back with knees bent and hands behind your head. 
+                        Lift your shoulder blades off the floor, exhaling as you crunch towards your knees.
+                        Lower back down slowly and with control, maintaining tension in your abdominal muscles.
+                    `
+                },
+                { 
+                    name: "Dead Bug",
+                    path: 'media/beginner/Dead-Bug.gif',
+                    description: `
+                        Lie on your back with arms extended toward the ceiling and legs raised in tabletop position.
+                        Lower one arm behind your head while extending the opposite leg, keeping your lower back pressed into the floor.
+                        Return to starting position and switch sides, alternating arms and legs.
+                    `
+                },
+                { 
+                    name: "Elbow To Knee Situp",
+                    path: 'media/beginner/Elbow-To-Knee-Situp.gif',
+                    description: `
+                        Lie on your back with knees bent and hands behind your head. 
+                        Perform a sit-up, bringing your right elbow towards your left knee as you crunch.
+                        Lower back down slowly and repeat on the other side.
+                    `
+                },
+                { 
+                    name: "Lying Leg Raise",
+                    path: 'media/beginner/lying-leg-raise.gif',
+                    description: `
+                        Lie on your back with legs straight and hands under your lower back for support.
+                        Lift your legs towards the ceiling, keeping them straight and lowering them back down with control.
+                        Keep your lower back pressed into the floor throughout the exercise.
+                    `
+                },
+                { 
+                    name: "Oblique Crunches",
+                    path: 'media/beginner/Oblique-Crunches.gif',
+                    description: `
+                        Lie on your back with knees bent and hands behind your head.
+                        Crunch up and twist to touch your right elbow to your left knee, focusing on your oblique muscles.
+                        Alternate sides and maintain steady breathing throughout.
+                    `
+                },
+                { 
+                    name: "Reverse Crunch",
+                    path: 'media/beginner/Reverse-Crunch.gif',
+                    description: `
+                        Lie on your back with knees bent and hands by your sides.
+                        Lift your hips off the floor by contracting your lower abdominal muscles.
+                        Lower back down slowly and with control to complete one repetition.
+                    `
+                }
+            ],
+            intermediate: [
+                { 
+                    name: "Band Assisted Wheel Rollouts",
+                    path: 'media/intermediate/Band-Assisted-Wheel-Rollouts.gif',
+                    description: `
+                        Kneel on the floor with a resistance band anchored in front of you.
+                        Roll the wheel forward while keeping your back straight and core engaged.
+                        Extend as far as you can without arching your lower back, then roll back to starting position.
+                    `
+                },
+                { 
+                    name: "Bicycle Crunch",
+                    path: 'media/intermediate/Bicycle-Crunch.gif',
+                    description: `
+                        Lie on your back with knees bent and hands behind your head. 
+                        Perform a bicycle motion with your legs while twisting your torso to touch your left elbow to your right knee.
+                        Keep your shoulder blades off the floor throughout the exercise.
+                    `
+                },
+                { 
+                    name: "Captains Chair Leg Raises",
+                    path: 'media/intermediate/Captains-Chair-Leg-Raises.gif',
+                    description: `
+                        Sit on a chair with your back against the pad and hold the sides for support.
+                        Lift your knees towards your chest while maintaining a straight back.
+                        Lower your legs back down slowly and with control to complete one repetition.
+                    `
+                },
+                { 
+                    name: "Decline Weighted Situp",
+                    path: 'media/intermediate/Decline-Weighted-Situp.gif',
+                    description: `
+                        Lie on a decline bench with your feet anchored and hold a weight plate across your chest.
+                        Perform a sit-up, lifting your torso towards your thighs while keeping your lower back flat.
+                        Lower back down slowly and repeat for the desired number of repetitions.
+                    `
+                },
+                { 
+                    name: "Hanging Flutter Kicks",
+                    path: 'media/intermediate/Hanging-Flutter-Kicks.gif',
+                    description: `
+                        Hang from a pull-up bar with arms extended and core engaged.
+                        Perform flutter kicks with your legs, moving them up and down in a controlled manner.
+                        Keep your legs straight and avoid swinging or using momentum.
+                    `
+                },
+                { 
+                    name: "Hanging Knee Raises",
+                    path: 'media/intermediate/Hanging-Knee-Raises.gif',
+                    description: `
+                        Hang from a pull-up bar with arms extended and core engaged.
+                        Lift your knees towards your chest, maintaining control and avoiding swinging.
+                        Lower your legs back down slowly and repeat for the desired number of repetitions.
+                    `
+                },
+                { 
+                    name: "Lying Leg Raise",
+                    path: 'media/intermediate/lying-leg-raise.gif',
+                    description: `
+                        Lie on your back with legs straight and hands under your lower back for support.
+                        Lift your legs towards the ceiling, keeping them straight and lowering them back down with control.
+                        Maintain tension in your abdominal muscles throughout the exercise.
+                    `
+                },
+                { 
+                    name: "Russian Twists",
+                    path: 'media/intermediate/Russian-Twists.gif',
+                    description: `
+                        Sit on the floor with knees bent and feet lifted, holding a weight or medicine ball.
+                        Rotate your torso from side to side, touching the weight to the floor beside you with each twist.
+                        Keep your back straight and core engaged throughout the exercise.
+                    `
+                },
+                { 
+                    name: "Weighted Crunch",
+                    path: 'media/intermediate/Weighted-Crunch.gif',
+                    description: `
+                        Lie on your back with knees bent and hold a weight or medicine ball at your chest.
+                        Lift your shoulder blades off the floor, exhaling as you crunch towards your knees.
+                        Lower back down slowly and with control to complete one repetition.
+                    `
+                },
+                { 
+                    name: "Weighted Knee Raises Captains Chair",
+                    path: 'media/intermediate/Weighted-Knee-Raises-Captains-Chair.gif',
+                    description: `
+                        Sit on a captains chair with your back against the pad and hold a dumbbell between your feet.
+                        Lift your knees towards your chest, maintaining a straight back and controlled movement.
+                        Lower your legs back down slowly and repeat for the desired number of repetitions.
+                    `
+                }
+            ],
+            advanced: [
+                { 
+                    name: "Hanging Flutter Kicks",
+                    path: 'media/advanced/Hanging-Flutter-Kicks.gif',
+                    description: `
+                        Hang from a pull-up bar with arms extended and core engaged.
+                        Perform flutter kicks with your legs, moving them up and down in a controlled manner.
+                        Keep your legs straight and avoid swinging or using momentum.
+                    `
+                },
+                { 
+                    name: "Hanging Half Windmill",
+                    path: 'media/advanced/Hanging-Half-Windmill.gif',
+                    description: `
+                        Hang from a pull-up bar with arms extended and core engaged.
+                        Perform a half windmill motion with your legs, moving them from side to side while keeping your core stable.
+                        Focus on controlled movement and maintain tension in your abdominal muscles.
+                    `
+                },
+                { 
+                    name: "Russian Twists",
+                    path: 'media/advanced/Russian-Twists.gif',
+                    description: `
+                        Sit on the floor with knees bent and feet lifted, holding a weight or medicine ball.
+                        Rotate your torso from side to side, touching the weight to the floor beside you with each twist.
+                        Keep your back straight and core engaged throughout the exercise.
+                    `
+                },
+                { 
+                    name: "Weighted Crunch",
+                    path: 'media/advanced/Weighted-Crunch.gif',
+                    description: `
+                        Lie on your back with knees bent and hold a weight or medicine ball at your chest.
+                        Lift your shoulder blades off the floor, exhaling as you crunch towards your knees.
+                        Lower back down slowly and with control to complete one repetition.
+                    `
+                },
+                { 
+                    name: "Weighted Decline Situp",
+                    path: 'media/advanced/Weighted-Decline-Situp.gif',
+                    description: `
+                        Lie on a decline bench with your feet anchored and hold a weight plate across your chest.
+                        Perform a sit-up, lifting your torso towards your thighs while keeping your lower back flat.
+                        Lower back down slowly and repeat for the desired number of repetitions.
+                    `
+                },
+                { 
+                    name: "Weighted Knee Raises Captains Chair",
+                    path: 'media/advanced/Weighted-Knee-Raises-Captains-Chair.gif',
+                    description: `
+                        Sit on a captains chair with your back against the pad and hold a dumbbell between your feet.
+                        Lift your knees towards your chest, maintaining a straight back and controlled movement.
+                        Lower your legs back down slowly and repeat for the desired number of repetitions.
+                    `
+                },
+                { 
+                    name: "Weighted Knee Raises Hanging",
+                    path: 'media/advanced/Weighted-Knee-Raises-Hanging.gif',
+                    description: `
+                        Hang from a pull-up bar with arms extended and core engaged.
+                        Hold a dumbbell between your feet and lift your knees towards your chest.
+                        Lower your legs back down slowly and with control to complete one repetition.
+                    `
+                },
+                { 
+                    name: "Weighted Seated Tuck Crunch",
+                    path: 'media/advanced/Weighted-Seated-Tuck-Crunch.gif',
+                    description: `
+                        Sit on the floor with knees bent and feet lifted, holding a weight or medicine ball close to your chest.
+                        Lean back slightly and lift your knees towards your chest while bringing the weight towards your knees.
+                        Lower your legs and the weight back down slowly to complete one repetition.
+                    `
+                },
+                { 
+                    name: "Wheel Rollout",
+                    path: 'media/advanced/Wheel-Rollout.gif',
+                    description: `
+                        Kneel on the floor with an ab wheel in front of you and hands gripping the handles.
+                        Roll the wheel forward while keeping your back straight and core engaged.
+                        Extend as far as you can without arching your lower back, then roll back to starting position.
+                    `
+                }
+            ]
+        };
+
+        function getRandomElements(array, count) {
+            const shuffled = array.sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, count);
+        }
+
+        function clearWorkoutInfo() {
+            const workoutImages = document.querySelectorAll('.workout-img');
+            workoutImages.forEach(img => img.src = '');
+
+            const exerciseInstructions = document.getElementById('exercise-instructions');
+            exerciseInstructions.innerHTML = '';
+        }
+
+        document.querySelectorAll('.level-button').forEach(button => {
+            button.addEventListener('click', () => {
+                // Clear previous workout info
+                clearWorkoutInfo();
+
+                const level = button.getAttribute('data-level');
+                let exercises = [];
+
+                if (level === 'beginner' || level === 'intermediate') {
+                    exercises = getRandomElements(workouts[level], 2);
+                    // Hide the third image
+                    document.getElementById('workout-image-3').style.display = 'none';
+                } else if (level === 'advanced') {
+                    exercises = getRandomElements(workouts[level], 3);
+                    // Show the third image
+                    document.getElementById('workout-image-3').style.display = 'inline-block';
+                }
+
+                // Display images and instructions
+                exercises.forEach((exercise, index) => {
+                    const workoutImage = document.getElementById(`workout-image-${index + 1}`);
+                    workoutImage.src = exercise.path;
+
+                    const exerciseInstructions = document.getElementById('exercise-instructions');
+                    exerciseInstructions.innerHTML += `
+                        <h3>${exercise.name}</h3>
+                        <p>${exercise.description}</p>
+                    `;
+                });
+            });
+        });
+    </script>
+</body>
 </html>
