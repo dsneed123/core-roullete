@@ -19,15 +19,27 @@
         </div>
        
         <div id="workout-image-container">
-            <img id="workout-image-1" src="" alt="Workout Image 1" class="workout-img"> 
-            
-            <img id="workout-image-2" src="" alt="Workout Image 2" class="workout-img">
+            <div class="exercise-group">
+                <img id="workout-image-1" src="" alt="Workout Image 1" class="workout-img"> 
+                <div class="exercise-instructions">
+
+                </div>
+            </div>
+            <div class="exercise-group">
+                <img id="workout-image-2" src="" alt="Workout Image 1" class="workout-img"> 
+                <div class="exercise-instructions">
+
+                </div>
+            </div>
            
-            <img id="workout-image-3" src="" alt="Workout Image 3" class="workout-img" style="display:none;">
+            <div class="exercise-group">
+                <img id="workout-image-3" src="" alt="Workout Image 1" class="workout-img" style="display: none;">
+                <div class="exercise-instructions">
+
+                </div>
+            </div>
         </div>
-        <div id="exercise-instructions">
-                
-        </div>
+
     </div>
 
     <script>
@@ -301,13 +313,12 @@
             const workoutImages = document.querySelectorAll('.workout-img');
             workoutImages.forEach(img => img.src = '');
 
-            const exerciseInstructions = document.getElementById('exercise-instructions');
-            exerciseInstructions.innerHTML = '';
+            const exerciseInstructions = document.querySelectorAll('.exercise-instructions');
+            exerciseInstructions.forEach(instructions => instructions.innerHTML = '');
         }
 
         document.querySelectorAll('.level-button').forEach(button => {
             button.addEventListener('click', () => {
-                // Clear previous workout info
                 clearWorkoutInfo();
 
                 const level = button.getAttribute('data-level');
@@ -315,21 +326,18 @@
 
                 if (level === 'beginner' || level === 'intermediate') {
                     exercises = getRandomElements(workouts[level], 2);
-                    // Hide the third image
-                    document.getElementById('workout-image-3').style.display = 'none';
+                    document.getElementById('workout-image-3').style.display = 'none'; // Hide the third image
                 } else if (level === 'advanced') {
                     exercises = getRandomElements(workouts[level], 3);
-                    // Show the third image
-                    document.getElementById('workout-image-3').style.display = 'inline-block';
+                    document.getElementById('workout-image-3').style.display = 'inline-block'; // Show the third image
                 }
 
-                // Display images and instructions
                 exercises.forEach((exercise, index) => {
                     const workoutImage = document.getElementById(`workout-image-${index + 1}`);
                     workoutImage.src = exercise.path;
 
-                    const exerciseInstructions = document.getElementById('exercise-instructions');
-                    exerciseInstructions.innerHTML += `
+                    const exerciseInstructions = document.querySelectorAll('.exercise-instructions')[index];
+                    exerciseInstructions.innerHTML = `
                         <h3>${exercise.name}</h3>
                         <p>${exercise.description}</p>
                     `;

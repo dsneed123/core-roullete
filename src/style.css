@@ -1,67 +1,80 @@
-body {
-    margin: 0;
-    height: 100vh;
+/* Styles for Small Devices (Mobile) */
+@media only screen and (max-width: 767px) {
+  body {
+    font-size: 14px; /* Example adjustment for smaller font size */
+  }
+  #header, #wrapper {
+    width: 100%; /* Adjust container width to full width */
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .workout-img {
+    width: 35vw; /* Example adjustment for smaller image size */
+    
+    margin: 1px;
+    
+  }
+  h3 {
+    font-size: 24px; /* Example adjustment for smaller font size */
+    color: #1481BA;
+  }
+  p{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: pt;
+  }
+  #workout-image-container{
     display: flex;
-    flex-direction: column; /* Stack items vertically */
-    background-color: lightslategray;
-    align-items: center;
-    color : black;
+    flex-direction: column;
+    justify-content: center;
+    margin : 10px;
   }
-  
-  #header {
-    background-color: gray;
-   
-    border: 2px solid gray;
-    width: 90%;
-    margin-left : 10%;
-    margin-right : 10%;
+  #level-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
   }
-  
-  #wrapper {
-    width: 90%;
-   
-    border: 2px solid gray;
-    margin-left : 10%;
-    margin-right : 10%;
-    background-color: white;
+  .level-button{
+    border : 1px solid #1481BA;
+    color : #1481BA;
+    background-color: transparent;
+    padding : 10px
+  }
+  .level-button:hover {
+    background-color: #1481BA; /* Flip background color on hover */
+    color: white; /* Flip text color on hover */
+  }
+  .exercise-group{
     display: flex;
     flex-direction: column;
     align-items: center;
+    border: transparent;
+    box-shadow: 3px 5px 5px 5px lightgray;
+    margin: 5px;
+    padding: 5px;
+    text-align: center;
   }
-  
+}
 
-  #workout-image-container{
-    display: flex;
-    flex-direction: row;
+/*------------------------------------------------------------------------------*/
+/* Styles for Medium Devices (Tablets) */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  body {
+    font-size: 16px; /* Example adjustment for medium font size */
   }
-
-/*------------------------------------------*/
-#level-container{
-    justify-content: center;
-    display: flex;
-    flex-direction: row;
-}
-.level-button{
-    border-radius: 12px;
-    border : 0;
-    padding: 1vw;
-    margin:3px;
-    background-color: light-gray;
-
+  #header, #wrapper {
+    width: 80%; /* Adjust container width to 80% */
+  }
 }
 
-.workout-img{
-    width: 15vw;
-    border : 3px solid lightgray;
-    margin : 3%;
-}
-#exercise-instructions > h3{
-    color: orange;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 30pt;
-}
-#exercise-instructions > p{
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 25pt;
-    
+
+
+/*------------------------------------------------------------------------------*/
+/* Styles for Large Devices (Desktops and Larger Screens) */
+@media only screen and (min-width: 992px) {
+  body {
+    font-size: 18px; /* Example adjustment for larger font size */
+  }
+  #header, #wrapper {
+    width: 70%; /* Adjust container width to 70% */
+  }
 }
